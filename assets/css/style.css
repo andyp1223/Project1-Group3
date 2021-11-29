@@ -64,6 +64,15 @@
       border-radius: 15px;
       text-shadow: none;
     }
+.header input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
 
 .column {
     flex: 33.33%;
