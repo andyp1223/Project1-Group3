@@ -1,4 +1,4 @@
-var recipesEl = document.querySelector("#recipes");
+var recipesEl = document.querySelector("#recipes-list");
 
 var getSpoonacularId = function() {
     var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=pasta&number=6&apiKey=2166a058487242eea34e1d18d83401d7";
@@ -24,7 +24,7 @@ var getSpoonacularRecipe = function () {
     fetch(recipeUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-            //   console.log(data);
+              console.log(data);
               recipeInfo(data);
             })
         } else {
@@ -61,6 +61,8 @@ var recipeOptions = function(data) {
             var dishTitle = document.createElement("h3");
             recipeImage.setAttribute("src", image);
             dishTitle.textContent = dish;
+
+            recipeImageContainer.setAttribute("class", "column");
 
             recipesEl.appendChild(recipeImageContainer);
             recipeImageContainer.appendChild(recipeImage);
@@ -99,5 +101,5 @@ var recipeOptions = function(data) {
 //         })
 // };
 
-// // getSpoonacularId();
+getSpoonacularRecipe();
 // getKroger();
