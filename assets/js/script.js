@@ -27,12 +27,11 @@ var getSpoonacularId = function (searchTerm) {
 var getSpoonacularRecipe = function () {
 
     var element = event.target;
-    var recipeDataParentId = element.parentElement.getAttribute("data-id");
     var recipeDataId = element.getAttribute("data-id");
 
-    if(element.matches("img")||element.matches("h3")) {
+    if(element.matches("img")||element.matches("h3")||element.matches("button")) {
 
-    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataParentId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
+    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
 
     fetch(recipeUrl).then(function (response) {
         if (response.ok) {
@@ -47,23 +46,7 @@ var getSpoonacularRecipe = function () {
         .catch(function (error) {
             //discuss ways to discuss errors
         })
-    } else if (element.matches("button")) {
-        var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
-
-        fetch(recipeUrl).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    // console.log(data);
-                    recipeInfo(data);
-                })
-            } else {
-                //discuss ways to address errors
-            }
-        })
-            .catch(function (error) {
-                //discuss ways to discuss errors
-            })
-    }
+    } 
 };
 
 
@@ -103,6 +86,8 @@ var recipeOptions = function (data) {
         dishTitle.textContent = dish;
         recipeContainer.id = "recipe-item";
         recipeContainer.setAttribute("data-id", recipeId);
+        recipeImage.setAttribute("data-id", recipeId);
+        dishTitle.setAttribute("data-id", recipeId);
 
         recipeContainer.setAttribute("class", "column");
 
