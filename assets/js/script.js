@@ -1,7 +1,11 @@
-var recipesEl = document.querySelector("#recipes-list");
+var searchInputEl = document.querySelector("#search-input");
+var recipeSearchEl = document.querySelector("#search-form");
+var showRecipes = document.querySelector("#recipes-list");
+var recipeBtn = document.querySelector("#recipe-item");
 
-var getSpoonacularId = function() {
-    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=pasta&number=6&apiKey=2166a058487242eea34e1d18d83401d7";
+// The endpoint for recipeOptions data
+var getSpoonacularId = function (searchTerm) {
+    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=6&apiKey=2166a058487242eea34e1d18d83401d7";
 
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
@@ -13,19 +17,27 @@ var getSpoonacularId = function() {
             //discuss ways to address errors
         }
     })
-    .catch(function (error) {
-        //discuss ways to address errors
-    })
+        .catch(function (error) {
+            //discuss ways to address errors
+        })
 };
 
+
+// The endpoint for recipeInfo data
 var getSpoonacularRecipe = function () {
-    var recipeUrl = "https://api.spoonacular.com/recipes/654901/information?apiKey=2166a058487242eea34e1d18d83401d7";
+
+    var element = event.target;
+    var recipeDataId = element.parentElement.getAttribute("data-id");
+
+    if(element.matches("button")||element.matches("img")||element.matches("h3")) {
+
+    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
 
     fetch(recipeUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-              console.log(data);
-              recipeInfo(data);
+                // console.log(data);
+                recipeInfo(data);
             })
         } else {
             //discuss ways to address errors
@@ -34,42 +46,67 @@ var getSpoonacularRecipe = function () {
         .catch(function (error) {
             //discuss ways to discuss errors
         })
+    }
 };
 
-var recipeInfo = function(data) {
-    for (var i = 0; i < data.extendedIngredients.length; i++) {
-        var ingredient = data.extendedIngredients[i].name
-      //   console.log(ingredient);
+
+// Gets all ingredients and other information from the user chosen recipe
+var recipeInfo = function (data) {
+   
+        for (var i = 0; i < data.extendedIngredients.length; i++) {
+            var ingredient = data.extendedIngredients[i].name
+            console.log(ingredient);
+        }
+        var winePair = data.winePairing.pairingText;
+        console.log(winePair);    
+};
+
+
+// Gets the stock photo and name of recipe and gives an id to be used to find that recipes info
+var recipeOptions = function (data) {
+
+    while (showRecipes.firstChild) {
+        showRecipes.removeChild(showRecipes.firstChild);
+    };
+
+    for (var i = 0; i < data.results.length; i++) {
+
+        var dish = data.results[i].title;
+        var recipeId = data.results[i].id;
+        var image = data.results[i].image;
+
+        // console.log(dish);
+        // console.log(id);
+        // console.log(image);
+
+        var recipeContainer = document.createElement("button");
+        var recipeImage = document.createElement("img");
+        var dishTitle = document.createElement("h3");
+        recipeImage.setAttribute("src", image);
+        dishTitle.textContent = dish;
+        recipeContainer.id = "recipe-item";
+        recipeContainer.setAttribute("data-id", recipeId);
+
+        recipeContainer.setAttribute("class", "column");
+
+        showRecipes.appendChild(recipeContainer);
+        recipeContainer.appendChild(recipeImage);
+        recipeContainer.appendChild(dishTitle);
     }
-    var winePair = data.winePairing.pairingText;
-  //   console.log(winePair);
-}
+};
 
-var recipeOptions = function(data) {
-    for(var i = 0; i < data.results.length; i++) {
 
-            var dish = data.results[i].title;
-            var id = data.results[i].id;
-            var image = data.results[i].image;
+var formSubmitHandler = function (event) {
+    event.preventDefault();
 
-            // console.log(dish);
-            // console.log(id);
-            // console.log(image);
+    var searchTerm = searchInputEl.value.trim();
 
-            var recipeImageContainer = document.createElement("a");
-            var recipeImage = document.createElement("img");
-            var dishTitle = document.createElement("h3");
-            recipeImage.setAttribute("src", image);
-            dishTitle.textContent = dish;
+    if (searchTerm) {
+        getSpoonacularId(searchTerm);
+        searchInputEl.value = "";
+    };
+};
 
-            recipeImageContainer.setAttribute("class", "column");
-
-            recipesEl.appendChild(recipeImageContainer);
-            recipeImageContainer.appendChild(recipeImage);
-            recipeImageContainer.appendChild(dishTitle);
-    }
-}
-  
 //	zcKjTp9a3eNAQwE1wKSEJlAiK96-3gc8QRHL1gsX secret
 
 // na-6ec66e124fb93c190e9207b0b82f542a4952163125802803846     id
@@ -101,5 +138,7 @@ var recipeOptions = function(data) {
 //         })
 // };
 
-getSpoonacularRecipe();
 // getKroger();
+
+recipeSearchEl.addEventListener("submit", formSubmitHandler);
+showRecipes.addEventListener("click", getSpoonacularRecipe);
