@@ -36,7 +36,7 @@ var getSpoonacularRecipe = function () {
     fetch(recipeUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
+                console.log(data);
                 recipeInfo(data);
             })
         } else {
@@ -68,6 +68,8 @@ var recipeOptions = function (data) {
     while (showRecipes.firstChild) {
         showRecipes.removeChild(showRecipes.firstChild);
     };
+
+    showRecipes.classList = "column";
 
     for (var i = 0; i < data.results.length; i++) {
 
@@ -109,38 +111,6 @@ var formSubmitHandler = function (event) {
     };
 };
 
-//	zcKjTp9a3eNAQwE1wKSEJlAiK96-3gc8QRHL1gsX secret
-
-// na-6ec66e124fb93c190e9207b0b82f542a4952163125802803846     id
-// var getKroger = function () {
-
-//     var set = {
-//         "async": true,
-//         "crossDomain": true,
-//         "url": "https://api-ce.kroger.com/v1/products?filter.brand=Kroger&filter.term=milk",
-//         "method": "GET",
-//         "headers": {
-//           "Accept": "application/json",
-//           "Authorization": "Bearer na-6ec66e124fb93c190e9207b0b82f542a4952163125802803846:cKjTp9a3eNAQwE1wKSEJlAiK96-3gc8QRHL1gsX"
-
-//         }
-//       }
-
-//     fetch(set).then(function (response) {
-//         if (response.ok) {
-//             response.json().then(function (data) {
-//               console.log(data);
-//             })
-//         } else {
-//             //discuss ways to address errors
-//         }
-//     })
-//         .catch(function (error) {
-//             //discuss ways to discuss errors
-//         })
-// };
-
-// getKroger();
 
 recipeSearchEl.addEventListener("submit", formSubmitHandler);
 showRecipes.addEventListener("click", getSpoonacularRecipe);
