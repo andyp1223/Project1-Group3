@@ -69,6 +69,8 @@ var recipeOptions = function (data) {
         showRecipes.removeChild(showRecipes.firstChild);
     };
 
+    showRecipes.classList = "column";
+
     for (var i = 0; i < data.results.length; i++) {
 
         var dish = data.results[i].title;
