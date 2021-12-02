@@ -33,7 +33,6 @@
       margin: 0; 
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-    
   
     header a {
       text-decoration: none;
@@ -110,7 +109,41 @@
     background-color: var(--secondary-color)
   }
 
+  .column button {
+    background-color: var(--tertiary-color);
+  }
+
   .column h3 {
     display: flex;
     flex-wrap: wrap;
   }
+
+   footer {
+    padding: 20px 35px;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
+    z-index: 9999;
+   }
+   
+    footer h2 {
+      color: #BFC0C0;
+      font-size: xx-large;
+      /* font-style: */
+    }
+
+    #secondPgHero {
+      display: none;
+    }
+
+
+    .noBtn {
+      display: none;
+    }

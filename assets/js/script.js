@@ -2,12 +2,19 @@
    
 var searchInputEl = document.querySelector("#search-input");
 var recipeSearchEl = document.querySelector("#search-form");
+var singleRecipeEl = document.querySelector("#single-recipe");
+var recipeTitleEl = document.querySelector("#recipe-title");
+var ingredientListEl = document.querySelector("#ingredient-list");
+var winePairingEl = document.querySelector("#wine-pairing");
+var instructionsEl = document.querySelector("#instructions");
+var recipeImgEl = document.querySelector("#recipe-img")
 var showRecipes = document.querySelector("#recipes-list");
 var recipeBtn = document.querySelector("#recipe-item");
+var backbtn = document.querySelector("#backBtn");
 
 // The endpoint for recipeOptions data
 var getSpoonacularId = function (searchTerm) {
-    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=6&apiKey=2166a058487242eea34e1d18d83401d7";
+    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=9&apiKey=2166a058487242eea34e1d18d83401d7";
 
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
@@ -27,19 +34,17 @@ var getSpoonacularId = function (searchTerm) {
 
 // The endpoint for recipeInfo data
 var getSpoonacularRecipe = function () {
-
-    var element = event.target;
-    var recipeDataId = element.getAttribute("data-id");
-
-    if(element.matches("img")||element.matches("h3")||element.matches("button")) {
+    var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
 
     var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
+
+    recipeSearchEl.removeEventListener("submit", formSubmitHandler);
 
     fetch(recipeUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
                 recipeInfo(data);
+                console.log(data)
             })
         } else {
             //discuss ways to address errors
@@ -48,19 +53,28 @@ var getSpoonacularRecipe = function () {
         .catch(function (error) {
             //discuss ways to discuss errors
         })
-    } 
 };
 
 
 // Gets all ingredients and other information from the user chosen recipe
 var recipeInfo = function (data) {
-   
+    var title = data.title;
+    var winePair = data.winePairing.pairingText;
+    var instructions = data.instructions;
+    var image = data.image;
+    
+    recipeTitleEl.textContent = title;
+    recipeImgEl.setAttribute("src", image);
+
         for (var i = 0; i < data.extendedIngredients.length; i++) {
-            var ingredient = data.extendedIngredients[i].name
-            console.log(ingredient);
-        }
-        var winePair = data.winePairing.pairingText;
-        console.log(winePair);    
+            var ingredient = data.extendedIngredients[i].originalString;
+            var listItem = document.createElement("li");
+            listItem.textContent = ingredient;
+            ingredientListEl.appendChild(listItem);
+        }    
+
+        instructionsEl.textContent = instructions;
+        winePairingEl.textContent = winePair;
 };
 
 
@@ -78,10 +92,6 @@ var recipeOptions = function (data) {
         var dish = data.results[i].title;
         var recipeId = data.results[i].id;
         var image = data.results[i].image;
-
-        // console.log(dish);
-        // console.log(id);
-        // console.log(image);
 
         var recipeContainer = document.createElement("button");
         var recipeImage = document.createElement("img");
@@ -113,38 +123,41 @@ var formSubmitHandler = function (event) {
     };
 };
 
-//	zcKjTp9a3eNAQwE1wKSEJlAiK96-3gc8QRHL1gsX secret
+var pageChange = function () {
+    var element = event.target;
+    var elementId = element.getAttribute("data-id");
+    saveRecipeId(elementId);
 
-// na-6ec66e124fb93c190e9207b0b82f542a4952163125802803846     id
-// var getKroger = function () {
+    if(element.matches("img")||element.matches("h3")||element.matches("button")) {
+        window.location.replace("./second.html");
+    }
+}
 
-//     var set = {
-//         "async": true,
-//         "crossDomain": true,
-//         "url": "https://api-ce.kroger.com/v1/products?filter.brand=Kroger&filter.term=milk",
-//         "method": "GET",
-//         "headers": {
-//           "Accept": "application/json",
-//           "Authorization": "Bearer na-6ec66e124fb93c190e9207b0b82f542a4952163125802803846:cKjTp9a3eNAQwE1wKSEJlAiK96-3gc8QRHL1gsX"
+var storedRecipeId = function () {
+    var storage = JSON.parse(localStorage.getItem("elementId"));
 
-//         }
-//       }
+    if (storage === null) {
+        storage = [];
+        var elementId = "";
+        storage.push(elementId);
+    } else {
+        return;
+    }
+};
 
-//     fetch(set).then(function (response) {
-//         if (response.ok) {
-//             response.json().then(function (data) {
-//               console.log(data);
-//             })
-//         } else {
-//             //discuss ways to address errors
-//         }
-//     })
-//         .catch(function (error) {
-//             //discuss ways to discuss errors
-//         })
-// };
+var saveRecipeId = function(elementId) {
+    localStorage.setItem('elementId', JSON.stringify(elementId))
+};
 
-// getKroger();
+if (window.location.href == "file:///Users/christophermccormack/Desktop/group-project/Project1-Group3/second.html") {
+    getSpoonacularRecipe();
+};
 
+var goBack = function() {
+    window.location.replace("./index.html")
+};
+
+storedRecipeId();
 recipeSearchEl.addEventListener("submit", formSubmitHandler);
-showRecipes.addEventListener("click", getSpoonacularRecipe);
+showRecipes.addEventListener("click", pageChange);
+backbtn.addEventListener("click", goBack);
