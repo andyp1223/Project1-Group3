@@ -153,7 +153,7 @@ var saveRecipeId = function (elementId) {
     localStorage.setItem('elementId', JSON.stringify(elementId))
 };
 
-if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Group3/second.html") {
+if (window.location.href == "file:///C:/Users/Andy/Desktop/RCB/project1-group3/second.html") {
     getSpoonacularRecipe();
 };
 
