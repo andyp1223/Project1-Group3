@@ -11,7 +11,6 @@ var recipeImgEl = document.querySelector("#recipe-img");
 var noResultEl = document.querySelector("#no-result");
 var showRecipes = document.querySelector("#recipes-list");
 var recipeBtn = document.querySelector("#recipe-item");
-var backbtn = document.querySelector("#backBtn");
 
 // The endpoint for recipeOptions data
 var getSpoonacularId = function (searchTerm) {
@@ -159,11 +158,6 @@ if (window.location.href == "file:///C:/Users/Andy/Desktop/RCB/project1-group3/s
     getSpoonacularRecipe();
 };
 
-var goBack = function () {
-    window.location.replace("./index.html")
-};
-
 storedRecipeId();
 recipeSearchEl.addEventListener("submit", formSubmitHandler);
 showRecipes.addEventListener("click", pageChange);
-backbtn.addEventListener("click", goBack);
