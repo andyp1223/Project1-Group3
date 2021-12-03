@@ -18,6 +18,8 @@ var getSpoonacularId = function (searchTerm) {
     var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=9&apiKey=8486a65f1f3a44f4a3d245898bc2b721";
     // 2166a058487242eea34e1d18d83401d7
     // 8486a65f1f3a44f4a3d245898bc2b721
+    // 26e612b0048144bfbea4351fc9eb3f60
+    // ae730946c55249789b6e18443db02fa9
 
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
@@ -43,6 +45,8 @@ var getSpoonacularRecipe = function () {
 
     // 2166a058487242eea34e1d18d83401d7
     // 8486a65f1f3a44f4a3d245898bc2b721
+    // 26e612b0048144bfbea4351fc9eb3f60
+    // ae730946c55249789b6e18443db02fa9
 
     recipeSearchEl.removeEventListener("submit", formSubmitHandler);
 
