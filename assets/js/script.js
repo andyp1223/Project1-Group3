@@ -1,5 +1,5 @@
 
-   
+
 var searchInputEl = document.querySelector("#search-input");
 var recipeSearchEl = document.querySelector("#search-form");
 var singleRecipeEl = document.querySelector("#single-recipe");
@@ -7,7 +7,8 @@ var recipeTitleEl = document.querySelector("#recipe-title");
 var ingredientListEl = document.querySelector("#ingredient-list");
 var winePairingEl = document.querySelector("#wine-pairing");
 var instructionsEl = document.querySelector("#instructions");
-var recipeImgEl = document.querySelector("#recipe-img")
+var recipeImgEl = document.querySelector("#recipe-img");
+var noResultEl = document.querySelector("#no-result");
 var showRecipes = document.querySelector("#recipes-list");
 var recipeBtn = document.querySelector("#recipe-item");
 var backbtn = document.querySelector("#backBtn");
@@ -19,7 +20,7 @@ var getSpoonacularId = function (searchTerm) {
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // console.log(data);
+                console.log(data);
                 recipeOptions(data);
             })
         } else {
@@ -36,7 +37,10 @@ var getSpoonacularId = function (searchTerm) {
 var getSpoonacularRecipe = function () {
     var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
 
-    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=2166a058487242eea34e1d18d83401d7";
+    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=8486a65f1f3a44f4a3d245898bc2b721";
+
+    // 2166a058487242eea34e1d18d83401d7
+    // 8486a65f1f3a44f4a3d245898bc2b721
 
     recipeSearchEl.removeEventListener("submit", formSubmitHandler);
 
@@ -47,7 +51,7 @@ var getSpoonacularRecipe = function () {
                 console.log(data)
             })
         } else {
-            //discuss ways to address errors
+            //discuss ways to discuss errors
         }
     })
         .catch(function (error) {
@@ -62,16 +66,16 @@ var recipeInfo = function (data) {
     var winePair = data.winePairing.pairingText;
     var instructions = data.instructions;
     var image = data.image;
-    
+
     recipeTitleEl.textContent = title;
     recipeImgEl.setAttribute("src", image);
 
-        for (var i = 0; i < data.extendedIngredients.length; i++) {
-            var ingredient = data.extendedIngredients[i].originalString;
-            var listItem = document.createElement("li");
-            listItem.textContent = ingredient;
-            ingredientListEl.appendChild(listItem);
-        }    
+    for (var i = 0; i < data.extendedIngredients.length; i++) {
+        var ingredient = data.extendedIngredients[i].originalString;
+        var listItem = document.createElement("li");
+        listItem.textContent = ingredient;
+        ingredientListEl.appendChild(listItem);
+    }
 
         instructionsEl.innerHTML = instructions;
         winePairingEl.textContent = winePair;
@@ -128,7 +132,7 @@ var pageChange = function () {
     var elementId = element.getAttribute("data-id");
     saveRecipeId(elementId);
 
-    if(element.matches("img")||element.matches("h3")||element.matches("button")) {
+    if (element.matches("img") || element.matches("h3") || element.matches("button")) {
         window.location.replace("./second.html");
     }
 }
@@ -145,7 +149,7 @@ var storedRecipeId = function () {
     }
 };
 
-var saveRecipeId = function(elementId) {
+var saveRecipeId = function (elementId) {
     localStorage.setItem('elementId', JSON.stringify(elementId))
 };
 
@@ -153,7 +157,7 @@ if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Gr
     getSpoonacularRecipe();
 };
 
-var goBack = function() {
+var goBack = function () {
     window.location.replace("./index.html")
 };
 
