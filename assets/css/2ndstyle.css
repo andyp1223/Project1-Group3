@@ -4,13 +4,6 @@
     --tertiary-color: #255f85;
   }
  
- 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
- 
     header {
       padding: 20px 35px;
       background-color: var(--tertiary-color);
@@ -38,6 +31,11 @@
       text-decoration: none;
       color: var(--primary-color);
     }
+  
+    header nav {
+      margin: 7px 0;
+    }
+  
     .dropbtn {
       background-color: #04AA6D;
       color: white;
@@ -119,43 +117,20 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
-
-    .hero input[type=text] {
-      float: right;
-      padding: 6px;
-      border: none;
-      font-size: 17px;
-      justify-content: center;
-    }
     
-.products {
-  width: 100vw;
-  height: 60vh;
-  display: flex;
+    .recipe {
+        padding: 50px 0 0 100px;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        display: flex;                                                                                
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 10em;
 }
 
-.column {
-    flex: 33.33%;
-    padding: 5px;
-    position: relative;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin: 25px;
-    margin-bottom: 50px;
-    background-color: var(--secondary-color)
-  }
-
-  .column button {
-    background-color: var(--tertiary-color);
-  }
-
-  .column h3 {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
+    
    footer {
     padding: 20px 35px;
     background-color: var(--tertiary-color);
