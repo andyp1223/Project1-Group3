@@ -71,34 +71,38 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-    
-    .recipe {
-        padding: 50px 0 0 100px;
-        justify-content: center;
-        flex-wrap: wrap;
-        align-items: center;
-        display: flex;                                                                                
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin: 10em;
+
+.box {
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: flex;                                                                                
+  align-items: center;
+  margin: 10em;
 }
 
-    
-   footer {
-    padding: 20px 35px;
-    background-color: var(--tertiary-color);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-position: 80%;
-    z-index: 9999;
-   }
+/* .recipe {
+  float: right;
+} */
+.widget {
+  order: 4;
+  align-self:center;
+}
+
+  footer {
+  padding: 20px 35px;
+  background-color: var(--tertiary-color);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-position: 80%;
+  z-index: 9999;
+  }
    
     footer h2 {
       color: #BFC0C0;
