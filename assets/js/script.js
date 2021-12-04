@@ -209,7 +209,7 @@ var goToFavorite = function(event) {
     }
 };
 
-if (window.location.href == "file:///Users/christophermccormack/Desktop/group-project/Project1-Group3/second.html") {
+if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
     getSpoonacularRecipe();
 };
 
