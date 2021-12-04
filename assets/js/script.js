@@ -9,9 +9,14 @@ var winePairingEl = document.querySelector("#wine-pairing");
 var instructionsEl = document.querySelector("#instructions");
 var recipeImgEl = document.querySelector("#recipe-img");
 var noResultEl = document.querySelector("#no-result");
+var dropdownEl = document.querySelector("#dropdown-items");
+var dropSectionEl = document.querySelector("#drop-section");
+var saveFavoritesEl = document.querySelector("#saved-favorites");
 var showRecipes = document.querySelector("#recipes-list");
 var recipeBtn = document.querySelector("#recipe-item");
-var backbtn = document.querySelector("#backBtn");
+var pageDataId = "";
+var storedTitle = "";
+var favStorage = JSON.parse(localStorage.getItem("favorites"));
 
 // The endpoint for recipeOptions data
 var getSpoonacularId = function (searchTerm) {
@@ -20,7 +25,6 @@ var getSpoonacularId = function (searchTerm) {
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
                 recipeOptions(data);
             })
         } else {
@@ -36,11 +40,15 @@ var getSpoonacularId = function (searchTerm) {
 // The endpoint for recipeInfo data
 var getSpoonacularRecipe = function () {
     var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
+    
+    pageDataId = recipeDataId;
 
     var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=8486a65f1f3a44f4a3d245898bc2b721";
 
     // 2166a058487242eea34e1d18d83401d7
     // 8486a65f1f3a44f4a3d245898bc2b721
+    // 26e612b0048144bfbea4351fc9eb3f60
+    // ae730946c55249789b6e18443db02fa9
 
     recipeSearchEl.removeEventListener("submit", formSubmitHandler);
 
@@ -48,7 +56,6 @@ var getSpoonacularRecipe = function () {
         if (response.ok) {
             response.json().then(function (data) {
                 recipeInfo(data);
-                console.log(data)
             })
         } else {
             //discuss ways to discuss errors
@@ -67,6 +74,7 @@ var recipeInfo = function (data) {
     var instructions = data.instructions;
     var image = data.image;
 
+    storedTitle = title;
     recipeTitleEl.textContent = title;
     recipeImgEl.setAttribute("src", image);
 
@@ -149,19 +157,66 @@ var storedRecipeId = function () {
     }
 };
 
-var saveRecipeId = function (elementId) {
-    localStorage.setItem('elementId', JSON.stringify(elementId))
+var storedFavorites = function() {
+    if (favStorage === null) {
+           favStorage = [];
+        
+    } else {
+        for (var i = 0; i < favStorage.length; i++) {
+            var listItem = document.createElement("li");
+            var aEl = document.createElement("a");
+
+            aEl.classList = "dropdown-item";
+            aEl.setAttribute("href", "#");
+            dropdownEl.appendChild(listItem);
+            listItem.appendChild(aEl);
+            aEl.textContent = favStorage[i].title;
+            aEl.setAttribute("data-id", favStorage[i].id);
+        }
+    } 
 };
 
-if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Group3/second.html") {
+var saveToFavorites = function() {
+    var favorites = {
+        title: storedTitle,
+        id: pageDataId
+    };
+    favStorage.push(favorites);
+
+    localStorage.setItem("favorites", JSON.stringify(favStorage)); 
+};
+
+var saveFavoriteRecipe = function() {
+    var favorites = {
+        title: storedTitle,
+        id: pageDataId
+    };
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+};
+
+var saveRecipeId = function (elementId) {
+    localStorage.setItem('elementId', JSON.stringify(elementId));
+};
+
+var goToFavorite = function(event) {
+    var element = event.target;
+    var elementId = element.getAttribute("data-id");
+    saveRecipeId(elementId);
+
+    if (element.matches("a")) {
+        window.location.replace("./second.html");
+    }
+};
+
+if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
     getSpoonacularRecipe();
 };
 
-var goBack = function () {
-    window.location.replace("./index.html")
-};
-
+storedFavorites();
 storedRecipeId();
 recipeSearchEl.addEventListener("submit", formSubmitHandler);
 showRecipes.addEventListener("click", pageChange);
-backbtn.addEventListener("click", goBack);
+saveFavoritesEl.addEventListener("click", saveToFavorites);
+dropSectionEl.addEventListener("click", goToFavorite);
+
