@@ -48,7 +48,7 @@
       margin: 7px 0;
     }
   
-   header nav ul {
+   .navList {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -56,14 +56,14 @@
       list-style: none;
     }
   
-    header nav ul li a {
+    .navBtn {
       padding: 10px 15px;
       font-weight: lighter;
       font-size: 1.55vw;
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
   
-    header nav ul li a:hover {
+    .navBtn:hover {
       background: var(--primary-color);
       color: var(--secondary-color);
       border-radius: 15px;
