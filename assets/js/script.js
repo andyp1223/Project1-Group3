@@ -1,5 +1,3 @@
-
-
 var searchInputEl = document.querySelector("#search-input");
 var recipeSearchEl = document.querySelector("#search-form");
 var singleRecipeEl = document.querySelector("#single-recipe");
@@ -21,18 +19,27 @@ var favStorage = JSON.parse(localStorage.getItem("favorites"));
 // The endpoint for recipeOptions data
 var getSpoonacularId = function (searchTerm) {
     var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=9&apiKey=8486a65f1f3a44f4a3d245898bc2b721";
+    showRecipes.textContent = "";
 
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                recipeOptions(data);
+                if (data.results.length == 0) {
+                    showRecipes.classList = "column";
+                    showRecipes.textContent = "No Results Match your Search";
+                } else {
+                    showRecipes.textContent = ""
+                    recipeOptions(data);
+                }
             })
         } else {
-            //discuss ways to address errors
+            showRecipes.classList = "column";
+            showRecipes.textContent = "Error: " + response.statusText;
         }
     })
         .catch(function (error) {
-            //discuss ways to address errors
+            showRecipes.textContent = "Unable to connect!"
+            console.log(error);
         })
 };
 
@@ -40,7 +47,7 @@ var getSpoonacularId = function (searchTerm) {
 // The endpoint for recipeInfo data
 var getSpoonacularRecipe = function () {
     var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
-    
+
     pageDataId = recipeDataId;
 
     var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=8486a65f1f3a44f4a3d245898bc2b721";
@@ -58,11 +65,11 @@ var getSpoonacularRecipe = function () {
                 recipeInfo(data);
             })
         } else {
-            //discuss ways to discuss errors
+            instructionsEl.textContent = "Error: " + response.statusText;
         }
     })
         .catch(function (error) {
-            //discuss ways to discuss errors
+            window.location.replace("./index.html");
         })
 };
 
@@ -85,8 +92,8 @@ var recipeInfo = function (data) {
         ingredientListEl.appendChild(listItem);
     }
 
-        instructionsEl.innerHTML = instructions;
-        winePairingEl.textContent = winePair;
+    instructionsEl.innerHTML = instructions;
+    winePairingEl.textContent = winePair;
 };
 
 
@@ -123,7 +130,7 @@ var recipeOptions = function (data) {
     }
 };
 
-
+//Sends the input from the form to the API URL
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
@@ -135,6 +142,7 @@ var formSubmitHandler = function (event) {
     };
 };
 
+// Changes the page to ./second.html
 var pageChange = function () {
     var element = event.target;
     var elementId = element.getAttribute("data-id");
@@ -145,6 +153,7 @@ var pageChange = function () {
     }
 }
 
+// Gets the stored recipe Id
 var storedRecipeId = function () {
     var storage = JSON.parse(localStorage.getItem("elementId"));
 
@@ -157,10 +166,11 @@ var storedRecipeId = function () {
     }
 };
 
-var storedFavorites = function() {
+// Sets the favStorage variable to an empty array on first visit to site, populates user favorites to drop down menu on all visits after
+var storedFavorites = function () {
     if (favStorage === null) {
-           favStorage = [];
-        
+        favStorage = [];
+
     } else {
         for (var i = 0; i < favStorage.length; i++) {
             var listItem = document.createElement("li");
@@ -173,33 +183,27 @@ var storedFavorites = function() {
             aEl.textContent = favStorage[i].title;
             aEl.setAttribute("data-id", favStorage[i].id);
         }
-    } 
+    }
 };
 
-var saveToFavorites = function() {
+// Saves favorite recipes to local storage
+var saveToFavorites = function () {
     var favorites = {
         title: storedTitle,
         id: pageDataId
     };
     favStorage.push(favorites);
 
-    localStorage.setItem("favorites", JSON.stringify(favStorage)); 
+    localStorage.setItem("favorites", JSON.stringify(favStorage));
 };
 
-var saveFavoriteRecipe = function() {
-    var favorites = {
-        title: storedTitle,
-        id: pageDataId
-    };
-
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-};
-
+//Saves recipe to local storage
 var saveRecipeId = function (elementId) {
     localStorage.setItem('elementId', JSON.stringify(elementId));
 };
 
-var goToFavorite = function(event) {
+// Adds functionality to recipes stored in favorites dropdown
+var goToFavorite = function (event) {
     var element = event.target;
     var elementId = element.getAttribute("data-id");
     saveRecipeId(elementId);
@@ -209,9 +213,11 @@ var goToFavorite = function(event) {
     }
 };
 
+// Checks window location and runs a code if url is on ./second.html
 if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
     getSpoonacularRecipe();
 };
+
 
 storedFavorites();
 storedRecipeId();
