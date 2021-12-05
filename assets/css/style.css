@@ -4,11 +4,12 @@
     --tertiary-color: #255f85;
   }
  
- 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:Georgia, Times, 'Times New Roman', serif;
+    font-weight: lighter;
   }
  
     header {
@@ -41,7 +42,7 @@
     .dropbtn {
       background-color: #04AA6D;
       color: white;
-      padding: 16px;
+      padding: 10px;
       font-size: 16px;
       border: none;
     }
@@ -106,6 +107,10 @@
 
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+ form {
+   display: flex;
+   
+ }   
  .hero {
   width: 100vw;
   height: 60vh;
@@ -120,6 +125,13 @@
   background-attachment: fixed;
 }
 
+.hero button {
+  background-color:#255f85;
+  color: white;
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 5px;
+}
 
     .hero input[type=text] {
       float: right;
@@ -127,12 +139,15 @@
       border: none;
       font-size: 17px;
       justify-content: center;
+      border-style: round;
+      border-radius: 5px;
     }
     
 .products {
   width: 100vw;
   height: 60vh;
   display: flex;
+  background-color: #255f85;
 }
 
 .column {
@@ -140,11 +155,11 @@
     padding: 5px;
     position: relative;
     text-align: center;
-    color: white;
+    color:#255f85;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin: 25px;
     margin-bottom: 50px;
-    background-color: var(--secondary-color)
+    background-color: var(--secondary-color);
   }
 
   .column button {
@@ -174,7 +189,8 @@
     footer h2 {
       color: #BFC0C0;
       font-size: xx-large;
-      /* font-style: */
+      font-family: cursive;
+      font-style: italic;
     }
 
     #secondPgHero {
