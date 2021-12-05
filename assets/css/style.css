@@ -157,7 +157,7 @@
     padding: 5px;
     position: relative;
     text-align: center;
-    color:#255f85;
+    color:white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin: 25px;
     margin-bottom: 50px;
@@ -169,6 +169,7 @@
   }
 
   .column h3 {
+    font-size: 18px;
     display: flex;
     flex-wrap: wrap;
   }

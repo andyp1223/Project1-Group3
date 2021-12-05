@@ -214,7 +214,11 @@ var goToFavorite = function (event) {
     }
 };
 
+<<<<<<< HEAD
 if (window.location.href == "file:///C:/Users/Andy/Desktop/RCB/project1-group3/index.html") {
+=======
+if (window.location.href == "file:///Users/christophermccormack/Desktop/group-project/Project1-Group3/second.html") {
+>>>>>>> b077d267a3640e13034fd348873267788e119f5e
     getSpoonacularRecipe();
 };
 
