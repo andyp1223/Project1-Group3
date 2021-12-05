@@ -18,7 +18,7 @@ var favStorage = JSON.parse(localStorage.getItem("favorites"));
 
 // The endpoint for recipeOptions data
 var getSpoonacularId = function (searchTerm) {
-    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=9&apiKey=26e612b0048144bfbea4351fc9eb3f60";
+    var spoonacularIdUrl = "https://api.spoonacular.com/recipes/complexSearch?query=" + searchTerm + "&number=9&apiKey=8486a65f1f3a44f4a3d245898bc2b721";
 
     fetch(spoonacularIdUrl).then(function (response) {
         if (response.ok) {
@@ -47,9 +47,11 @@ var getSpoonacularId = function (searchTerm) {
 var getSpoonacularRecipe = function () {
     var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
 
+    console.log(recipeDataId)
+
     pageDataId = recipeDataId;
 
-    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=26e612b0048144bfbea4351fc9eb3f60";
+    var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=8486a65f1f3a44f4a3d245898bc2b721";
 
     // 2166a058487242eea34e1d18d83401d7
     // 8486a65f1f3a44f4a3d245898bc2b721
@@ -212,7 +214,7 @@ var goToFavorite = function (event) {
     }
 };
 
-if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Group3/second.html") {
+if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
     getSpoonacularRecipe();
 };
 
