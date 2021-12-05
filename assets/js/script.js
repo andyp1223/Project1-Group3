@@ -105,7 +105,7 @@ var recipeOptions = function (data) {
         showRecipes.removeChild(showRecipes.firstChild);
     };
 
-    showRecipes.classList = "column-wrap";
+    showRecipes.classList = "column";
 
     for (var i = 0; i < data.results.length; i++) {
 
