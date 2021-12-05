@@ -105,7 +105,7 @@ var recipeOptions = function (data) {
         showRecipes.removeChild(showRecipes.firstChild);
     };
 
-    showRecipes.classList = "column-wrap";
+    showRecipes.classList = "column";
 
     for (var i = 0; i < data.results.length; i++) {
 
@@ -214,7 +214,7 @@ var goToFavorite = function (event) {
     }
 };
 
-if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
+if (window.location.href == "file:///C:/Users/Andy/Desktop/RCB/project1-group3/index.html") {
     getSpoonacularRecipe();
 };
 
