@@ -101,6 +101,9 @@
 .widget {
   order: 4;
   align-self: flex-end;
+  max-width:360px; 
+  width:96%; 
+  margin: 0 auto
 }
 
   footer {
@@ -131,4 +134,43 @@
 
     .noBtn {
       display: none;
+    }
+
+  
+    .col-6 img {
+      border: 10px solid #255f85;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      margin-left: 15px;
+      max-width:100%;
+      height:auto;
+      
+     }
+
+    .listings {
+      margin-top: 20px;
+      color: #ffff;
+    }
+
+    .instructions {
+      margin: 10px;
+      padding: 10px;
+    }
+    
+    .text {
+      margin: 10px;
+      padding: 10px;
+    }
+
+    .heading {
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .pairings {
+      margin: 10px;
+      padding: 10px;
+      color: var(--tertiary-color);
     }

@@ -214,7 +214,7 @@ var goToFavorite = function (event) {
     }
 };
 
-if (window.location.href == "file:///C:/Users/Andy/Desktop/RCB/project1-group3/second.html") {
+if (window.location.href == "https://andyp1223.github.io/Project1-Group3/second.html") {
     getSpoonacularRecipe();
 };
 

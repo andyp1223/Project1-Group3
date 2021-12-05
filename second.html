@@ -41,12 +41,15 @@
 
     <div class="box">
         <section class=recipe id="single-recipe">
-            <div class="row">
+            <h2 id="recipe-title" class="heading"></h2>
+            <div class="row d-flex">
                 <div id="img-box" class="col-6">
-                    <h2 id="recipe-title"></h2>
+                    
                     <img id="recipe-img" src="">
+                    
                 </div>
-                <div id="widget-box" class="col-6 d-flex align-items-center">
+
+                <div id="widget-box" class="col-6  d-flex align-items-center">
                     <div class="widget" style="max-width:360px; width:96%; margin: 0 auto">
                         <div style="position:relative; height: 0; padding-bottom:100%; margin: 1px"><iframe
                                 src="https://quiniwine.com/widget?widgetconfigid=61a81ccb1ea9f4265a1489a3&amp;personid=&amp;reviewsOption=community&amp;titleColor=teal&amp;limit=3"
@@ -55,9 +58,11 @@
                     </div>
                 </div>
             </div>
-            <ul id="ingredient-list"></ul>
-            <section id="instructions"></section>
-            <p id="wine-pairing"></p>
+            <ul id="ingredient-list" class="listings"></ul>
+            <h2 class="pairings">Instructions:</h2>
+            <section id="instructions" class="instructions"></section>
+            <h2 class="pairings">Wine Pairing:</h2>
+            <p id="wine-pairing" class="text"></p>
         </section>
     </div>
 
