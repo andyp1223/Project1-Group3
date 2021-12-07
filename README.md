@@ -17,7 +17,7 @@ The following images shows the full web page:
 
 ![Home Page](./assets/images/home-image.png)
 
-![Second Page](./assets/images/TDB-image.png)
+![Second Page](./assets/images/secondpg-image.png)
 
 ## Website link
 [Top Recipes](https://andyp1223.github.io/Project1-Group3/)
