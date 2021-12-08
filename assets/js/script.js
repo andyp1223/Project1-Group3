@@ -57,6 +57,7 @@ var getSpoonacularRecipe = function () {
     // 8486a65f1f3a44f4a3d245898bc2b721
     // 26e612b0048144bfbea4351fc9eb3f60
     // ae730946c55249789b6e18443db02fa9
+    console.log(recipeUrl)
 
     recipeSearchEl.removeEventListener("submit", formSubmitHandler);
 
@@ -214,7 +215,7 @@ var goToFavorite = function (event) {
     }
 };
 
-if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Group3/second.html") {
+if (location.pathname.includes("second.html")) {
     getSpoonacularRecipe();
 };
 
