@@ -47,8 +47,6 @@ var getSpoonacularId = function (searchTerm) {
 var getSpoonacularRecipe = function () {
     var recipeDataId = JSON.parse(localStorage.getItem("elementId"));
 
-    console.log(recipeDataId)
-
     pageDataId = recipeDataId;
 
     var recipeUrl = "https://api.spoonacular.com/recipes/" + recipeDataId + "/information?apiKey=ae730946c55249789b6e18443db02fa9";
@@ -73,7 +71,6 @@ var getSpoonacularRecipe = function () {
             window.location.replace("./index.html");
         })
 };
-
 
 // Gets all ingredients and other information from the user chosen recipe
 var recipeInfo = function (data) {
@@ -214,7 +211,7 @@ var goToFavorite = function (event) {
     }
 };
 
-if (window.location.href == "file:///Users/y.ramirez/Desktop/Develop/Project1-Group3/second.html") {
+if (location.pathname.includes("second.html")) {
     getSpoonacularRecipe();
 };
 
