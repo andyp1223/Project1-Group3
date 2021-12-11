@@ -8,6 +8,8 @@
     font-family:Georgia, Times, 'Times New Roman', serif;
     font-weight: lighter;
   }
+
+  /* Header styling starts */
     header {
       padding: 20px 35px;
       background-color: var(--tertiary-color);
@@ -22,7 +24,7 @@
       background-position: 80%;
       z-index: 9999;
   }
-  
+
     header h1 {
       font-weight: bold;
       font-size: 36px;
@@ -39,7 +41,7 @@
     header nav {
       margin: 7px 0;
     }
-  
+ 
     .dropbtn {
       background-color: #04AA6D;
       color: white;
@@ -86,7 +88,9 @@
     .dropdown:hover .dropdown-content {display: block;}
   
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
+/* Header styling ends */
 
+/* Recipe box styling starts */
 .box {
   flex-direction: column-reverse;
   flex-wrap: wrap;
@@ -95,7 +99,6 @@
   margin: 10px;
   background-color:#EF8354;
   text-decoration-color:white;
-
 }
 
 .widget {
@@ -106,6 +109,45 @@
   margin: 0 auto
 }
 
+.col-6 img {
+  border: 10px solid #255f85;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  margin-left: 15px;
+  max-width:100%;
+  height:auto;
+ }
+
+.listings {
+  margin-top: 20px;
+  color: #ffff;
+}
+
+.instructions {
+  margin: 10px;
+  padding: 10px;
+}
+
+.text {
+  margin: 10px;
+  padding: 10px;
+}
+
+.heading {
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.pairings {
+  margin: 10px;
+  padding: 10px;
+  color: var(--tertiary-color);
+}
+/* Recipe box styling ends */
+
+/* Footer styling starts */
   footer {
   padding: 20px 35px;
   background-color: var(--tertiary-color);
@@ -126,51 +168,15 @@
       font-size: xx-large;
       font-family: cursive;
     }
+/* Footer styling ends */
 
+/* hiding code from js */
     #secondPgHero {
       display: none;
     }
-
 
     .noBtn {
       display: none;
     }
 
-  
-    .col-6 img {
-      border: 10px solid #255f85;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      margin-left: 15px;
-      max-width:100%;
-      height:auto;
-      
-     }
-
-    .listings {
-      margin-top: 20px;
-      color: #ffff;
-    }
-
-    .instructions {
-      margin: 10px;
-      padding: 10px;
-    }
     
-    .text {
-      margin: 10px;
-      padding: 10px;
-    }
-
-    .heading {
-      text-align: center;
-      color: #fff;
-      padding: 20px;
-      font-size: 40px;
-      font-weight: bold;
-    }
-
-    .pairings {
-      margin: 10px;
-      padding: 10px;
-      color: var(--tertiary-color);
-    }

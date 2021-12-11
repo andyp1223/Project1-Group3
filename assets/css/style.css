@@ -12,6 +12,7 @@
     font-weight: lighter;
   }
  
+  /*Header styling starts */
     header {
       padding: 20px 35px;
       background-color: var(--tertiary-color);
@@ -39,6 +40,7 @@
       text-decoration: none;
       color: var(--primary-color);
     }
+
     .dropbtn {
       background-color: #04AA6D;
       color: white;
@@ -72,14 +74,11 @@
       border-radius: 15px;
       text-shadow: none;
     }  
-  
-    
     
     .dropdown {
       position: relative;
       display: inline-block;
     }
-    
     
     .dropdown-content {
       display: none;
@@ -90,15 +89,13 @@
       z-index: 1;
     }
     
- 
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
     }
-    
-
+  
     .dropdown-content a:hover {background-color: #ddd;}
     
  
@@ -106,7 +103,9 @@
     
 
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  /*Header styling ends */
 
+  /* search bar and hero styling starts*/
  form {
    display: flex;
    
@@ -142,15 +141,15 @@
       border-style: round;
       border-radius: 5px;
     }
-    
+/* search bar and hero styling ends*/  
+
+/* recipe columns styling starts */
 .products {
   width: 100vw;
   height: 60vh;
   display: flex;
   background-color: #255f85;
 }
-
-
 
 .column {
     flex: 33.33%;
@@ -173,7 +172,9 @@
     display: flex;
     flex-wrap: wrap;
   }
+/* recipe columns styling starts */  
 
+/* Footer styling starts */
    footer {
     padding: 20px 35px;
     background-color: var(--tertiary-color);
@@ -195,11 +196,12 @@
       font-family: cursive;
       font-style: italic;
     }
+/* Footer styling ends */
 
+/* hiding code from js */
     #secondPgHero {
       display: none;
     }
-
 
     .noBtn {
       display: none;
